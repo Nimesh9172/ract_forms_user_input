@@ -15,7 +15,18 @@ const SimpleInput = (props) => {
 
   const inputHandler = (event) => {
     setEnteredName(event.target.value);
+
+    if (enteredName.trim().length === 0) {
+      setEnteredNameIsValid(false)
+      return;
+    }
+
   };
+
+  const nameInputBlurHandler = event => {
+    setEnteredNameIsTouched(true)
+
+  }
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -25,7 +36,6 @@ const SimpleInput = (props) => {
       return;
     }
     
-    console.log(enteredName, inputRef.current.value);
     
     setEnteredName("");
     setEnteredNameIsValid(true)
@@ -39,6 +49,7 @@ const SimpleInput = (props) => {
           type="text"
           id="name"
           onChange={inputHandler}
+          onBlur={nameInputBlurHandler}
           ref={inputRef}
           value={enteredName}
         />
